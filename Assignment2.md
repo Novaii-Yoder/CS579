@@ -25,13 +25,20 @@ The malware attempts to contact websites at `kronus.pp.ua` and `onus.pp.ua`.
 The malware also will change files to have the `.KEYPASS` extention as described in the ransom note
 The ransom note also has two emails listed, `keypassdecrypt@india.com` and `BM-2cUMY51WfNRG8jGrWcMzTASeUGX84yX741@bitmessage.ch`, any corespondance to these would also be signs of compromise
 
-#YARA rule
+# Clues About Origin
+We have a few conflicting clues as to where the malware originated from:
+  1. I found a connection to `kronus.pp.ua` and `onus.pp.ua` which are Ukrainian based sites
+  2. There is a few grammar mistakes which could imply any foreign origin outside of dominatly English speaking countries
+  3. The email has `@india.com` which likely means very little because anyone can obtain the domain india.com
+  4. I found some strings indicating languages including `english-south african`, `english-trinidad y tobago`, `portuguese-brazilian`, and `spanish-dominican republic` 3 of which point towards the caribbean
+
+# YARA rule
 ```
 rule detectKeyPass 
 {
     strings:
         $a = "KEYPASS"
-        $b = "kronus.pp.ua"
+        $b = "kronus.pp.ua" nocase
         $c = "onus.pp.ua" nocase
         $d = "keypassdecrypt@india.com" nocase
 
