@@ -1,6 +1,13 @@
 # Assignment 3
 # Solving the Crackme
 I used Ghidra to solve the crackme, as it seemed to be the most intuitive to use, I'm sure IDA Pro has more options and capabilities, but Ghidra so far seems easier to use. I started by working backwards, taking a look at the print statement that prints the good answer, then trying to get all the up till that point coniditional statements to be true. So we see that there is a variable(var1) that has to evaluate to true. So, I followed the var1 to where it was assigned the output of a function, inside this function was a simple modulo on another variable, var2, and a comparison to 0, so we need var2 to be a mulitiple of the modulo for us to find a key that works. And if you follow var2 back to the function call, and even before that we see that it is simply the number inputted from the command line. So I just created a simple program that prints out 0 and pipes it into the crackme.
+~~~
+Python code
+print(0)
+~~~
+![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/3494b1e6-389f-45a3-9e7b-8f5febf4ff34)
+
+
 
 # Crackme in IDA Pro and Ghidra
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/03ab39dd-39df-415b-9edc-e8fc44f0e46c)
