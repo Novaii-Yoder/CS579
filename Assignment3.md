@@ -13,23 +13,23 @@ The RSP register wil
 3. What is a stack frame?
 A stack frame is the environment a function call lives in, it contains all the local variables aswell as the return addresses and stack pointers for the call above it.
 4. What would you find in a data section?
-
+The data section is where global and static variables are stored.
 5. What is the heap used for?
-
+The heap is used for dynamically allocated memory like variables. 
 6. What is in the code section of a program's virtual memory space?
-
+The code section is where the byte code of a program is stored.
 7. What does the inc instruction do, and how many operands does it take?
-
+It increase the value of a single register 
 8. If I perform a div instruction, where would I find the remainder of the binary division (modulo)?
-
+EDX is where the remainder of a div instruction gets put.
 9. How does jz decide whether to jump or not?
-
+The jz instruction checks the zero flag to decide if it should jump. If the zero flag is 0 it does jump, and if it is 0 the it doesn't jump.
 10. How does jne decide whether to jump or not?
-
+The jne instruction checks the zero flag to decide if it should jump. If the zero flag is 0 it doesn't jump, and if it is 1 it does jump.
 11. What does a mov instruction do?
-
+It moves the contents of one register into another.
 12. What does the TF flag do, and why is it useful for debugging?
-
+TF is th trap flag, and it is used to put the processor in single step mode, allowing us to use debuggers to step throught the execution.
 13. Why would an attacker want to control the RIP register inside a program they want to take control of?
 An attacker can execute any code that is loaded in the .data section of a program by controlling the RIP register, as the RIP register is the instruction pointer it dictates what instructions will be run next on the CPU.
 14. What is the ax register and how does it relate to rax?
@@ -41,11 +41,11 @@ The leave instruction loads the RBP register into RSP and pops the stack into RB
 17. What pop instruction is retn equivalent to?
 pop %RIP
 pop %RSP
-19. What is a stack overflow?
+18. What is a stack overflow?
 When the stack out grows whatever limit the operating system puts on it. 
-20. What is a segmentation fault (a.k.a. a segfault)?
+19. What is a segmentation fault (a.k.a. a segfault)?
 Segfaults occur when a program or function attempts to access a piece of memory outside of its frame or is not allowed to access.
-21. What are the RSI and RDI registers for that gives them their name?
+20. What are the RSI and RDI registers for that gives them their name?
 RSI - Register Source Index
 RDI - Register Destination Index
 These registers are used by the system as the source and destination when copying or moving bytes.
