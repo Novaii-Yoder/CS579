@@ -4,21 +4,21 @@ In this report I go over the steps I took to crack and solve 6 crackmes, as well
 
 # Crackme 1
 This crackme was a simple single string compare that would output the right answer if the compare evaluated to zero. So, I followed the two inputs to the compare, one was just a simple input from the command line. The other was stored in the data section of the code as `picklecucumberl337`.
-~~~
+~~~python
 # keygen_easy_crackme_1.py
 print("picklecucumberl337")
 ~~~
 
 # Crackme 2
 This crackme was very similar to the last, just a single string compare. After following the variables we find in the code the password `artificialtree`.
-~~~
+~~~python
 # keygen_easy_crackme_2.py
 print("picklecucumberl337")
 ~~~
 
 # Crackme 3
 This crackme was a step up from the previous 2 and the password was now created at runtime and was not stored in one spot. We find that to get the message we want from the code we again need to match a string compare, but if we follow the variables we see that the input needs to match a string that has been concatenated a couple times. If we start at the beginning for the key, we see that it concats an empty string with `strawberry`, then that string is concatenated again with the string `kiwi`. Which leaves us with the key `strawberrykiwi`.
-~~~
+~~~python
 # keygen_easy_crackme_3.py
 print("strawberrykiwi")
 ~~~
@@ -33,7 +33,7 @@ We now want to find the function that calls paper and passes the argument where 
 Finally, we have a key: 
 Any 16+ character string where index 0 is `A`, index 1 is `6`, index 3 is `2`, index 7 is `%`, and index 15 is `*`. i.e. `A6XXXXX%XXXXXXX*` where X is any character.
 
-~~~
+~~~python
 #keygen_controlflow1.py
 import string
 import random
@@ -45,4 +45,21 @@ print(f"A6{gen_ran_string(1)}2{gen_ran_string(3)}%{gen_ran_string(7)}*{gen_ran_s
 ~~~
 
 # Crackme 5 (ControlFlow2)
+I followed the same idea as controlflow1 but to save space, I will just put the restrictions on the password that I find.
+- Must have 16 or more characters
+- The 6th index must be `Y`
+- The 8th index must be `#`
+- The 10th index must be `A`
+- the 13th index must be `6`
+- the 11th index must be `*`
+  
+~~~python
+#keygen_controlflow1.py
+import string
+import random
 
+def gen_ran_string(length):
+  return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+
+print(f"{gen_ran_string(6)}Y{gen_ran_string(1)}#{gen_ran_string(1)}A*{gen_ran_string(1)}6{gen_ran_string(random.randint(2,16))}")
+~~~
