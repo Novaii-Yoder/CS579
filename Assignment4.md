@@ -54,7 +54,7 @@ I followed the same idea as controlflow1 but to save space, I will just put the 
 - the 11th index must be `*`
   
 ~~~python
-#keygen_controlflow1.py
+#keygen_controlflow2.py
 import string
 import random
 
@@ -75,7 +75,7 @@ This crackme was a little more complex as far as the keygen, but finding the rul
 - index[12] ^ index[8] ^ index[9] != index[10] < 3
 
 ~~~python
-#keygen_controlflow1.py
+#keygen_controlflow3.py
 import string
 import random
 
