@@ -63,3 +63,41 @@ def gen_ran_string(length):
 
 print(f"{gen_ran_string(6)}Y{gen_ran_string(1)}#{gen_ran_string(1)}A*{gen_ran_string(1)}6{gen_ran_string(random.randint(2,16))}")
 ~~~
+
+# Crackme 6 (ControlFlow3)
+This crackme was a little more complex as far as the keygen, but finding the rules were just as easy as the other crackmes. I followed this control flow from the start of the program just looking for the next function call that wasn't recursive or back tracing. 
+- Must have exactly 16 characters
+- index[1] + index[3] - index[5] == index[6]
+- index[6] ^ index[7] < 3
+- index[10] == index[12]
+- index[8] ^ index[7] !< 4
+- index[8] != index[9]
+- index[12] ^ index[8] ^ index[9] != index[10] < 3
+
+~~~python
+#keygen_controlflow1.py
+import string
+import random
+
+def gen_ran_string(length):
+  return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+key = [gen_ran_string(1) for _ in range(16)]
+while(1):
+  key = [gen_ran_string(1) for _ in range(16)]
+  key_asc = [ord(char) for char in key]
+  if key_asc[1] + key_asc[3] - key_asc[5] != key_asc[6]:
+    continue
+  if key_asc[6] ^ key_asc[7] >= 3:
+    continue
+  if key_asc[10] != key_asc[12]:
+    continue
+  if key_asc[8] ^ key_asc[7] >= 3:
+    continue
+  if key_asc[8] == key_asc[9]:
+    continue
+  if key_asc[12] ^ key_asc[8] ^ key_asc[9] == key_asc[10] < 3:
+    continue
+  break
+
+print(''.join(key))
+~~~
