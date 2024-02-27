@@ -31,8 +31,18 @@ Now we know that we must have the argument inputted into the function lizard to 
 We now want to find the function that calls paper and passes the argument where index 0 is `A`, index 1 is `6`, index 7 is `%`, and index 15 is `*`. We find that the function `rock` calls paper and that to get it to be called we need the 3rd index of the argument to be `2`. Finally, if we look through the main function we can see that it is the one that calls the rock function. And to get it to call that function we need our argument to have a length of 16 or more. Looking at the initialization of the argument we can also see that it is the first argument after calling the function on the command line. 
 
 Finally, we have a key: 
-Any 16+ character string where index 0 is `A`, index 1 is `6`, index 7 is `%`, and index 15 is `*`. i.e. `A6XXXXX%XXXXXXX*` where X is any character.
+Any 16+ character string where index 0 is `A`, index 1 is `6`, index 3 is `2`, index 7 is `%`, and index 15 is `*`. i.e. `A6XXXXX%XXXXXXX*` where X is any character.
 
 ~~~
+#keygen_controlflow1.py
+import string
+import random
 
+def gen_ran_string(length):
+  return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+
+print(f"A6{gen_ran_string(1)}2{gen_ran_string(3)}%{gen_ran_string(7)}*{gen_ran_string(random.randint(0, 16))}")
 ~~~
+
+# Crackme 5 (ControlFlow2)
+
