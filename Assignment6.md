@@ -13,10 +13,8 @@ To solve this crackme I had to create a
 To solve this crackme I had to create a keygen that produces a serial number that gets past the crackme.
 My solution is:
 
-```
-#!/usr/bin/env python3
+```python3
 
-print("This is the answer!")
 ```
 
 
