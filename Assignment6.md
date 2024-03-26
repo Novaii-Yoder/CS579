@@ -14,7 +14,27 @@ To solve this crackme I had to create a keygen that produces a serial number tha
 My solution is:
 
 ```python3
+import string
+import random
 
+def getchar(ch):
+    tmp = ch
+    while tmp == ch:
+        tmp = random.choice([chr(i) for i in range(86, 90)] + [chr(i) for i in range(97, 122)])
+    return tmp
+
+arr = [0] * 19
+arr[4] = arr[9] = arr[14] = '-'
+arr[10] = arr[8] = random.choice(string.ascii_letters + string.digits)
+arr[13] = arr[5] = random.choice(string.ascii_letters + string.digits)
+arr[1] = arr[2] = getchar('*') // excludes given char, which is an illegal char anyways
+arr[16] = arr[17] = getchar('*')
+
+serial = ""
+for x in arr:
+    serial += str(x)
+
+print(serial)
 ```
 
 
