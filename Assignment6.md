@@ -2,13 +2,41 @@
 
 
 
-### Crackme 1 Solution (link/to/download/location):
+### Crackme 1 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/seveb/crackme05/download/crackme05.tar.gz)):
 
-To solve this crackme I had to create a
+To solve this crackme I had to create a keygen that creates a usable username and serial number, which is reliant on the username.
 
+My keygen:
+~~~python
+import string
+import random
 
+length = random.randint(8,12)
+chars = string.ascii_letters + string.digits
+arr = [random.choice(chars) for _ in range(length)]
+pas = []
 
-### Crackme 2 Solution (link/to/download/location):
+for i in range(length):
+    temp = 0
+    if (i%2 == 0):
+        temp = int(ord(str.lower(arr[i])))
+    else:
+        temp = int(ord(str.upper(arr[i])))
+    pas.append(str(temp))
+
+serial = ""
+for x in pas:
+    serial += str(x)
+serial = serial[(len(arr)-8)*2:(len(arr)-8)*2 +8]
+username = ""
+for x in arr:
+    username += str(x)
+
+print(username)
+print(serial)
+~~~
+
+### Crackme 2 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/adamziaja/crackme1/download/crackme1.tar.gz)):
 
 To solve this crackme I had to create a keygen that produces a serial number that gets past the crackme.
 My solution is:
@@ -58,6 +86,19 @@ print(serial)
     index[14] + index[4] + index[9] == 135
     which is only possible when all three indexs are 45 which is '-'
 8. To test my rules I tried the serial `0yY0-B00A-A00B-0jY0`, and everything came up cherry.
+
+### Crackme 5 Solution ([link/to/download/location](http://crackmes.cf/users/seveb/crackme04/download/crackme04.tar.gz)):
+
+To solve this crackme I had to create a keygen that produces a serial number that gets past the crackme.
+My solution is:
+patch the binary
+
+
+### How I did it using Ghidra:
+1. After opening the binary I saw that there was 2 end function:
+    `theEnd` function which is the one where we complete the crackme and the `theOtherEnd` which is where we lose and also where the crackme deletes itself. This is an issue for testing my keygen, so I went into the binary with Ghidra and replaced the function call to delete the file with a bunch of NOPs.
+        Side note: since the win function was right below this function and there is no return it actually executes the `theEnd` at the end of the `theOtherEnd` now. Which would work in reality as is to break the crackme.
+2. I also noticed that the program finds local time and pid of the process and if they are equal to specific values it deletes itself. But this is another thing we can patch out by changing the JZ commands with JNZ, which means it will only delete itself if you run it at the specified time and it by chance has the right pid.
 
 
 
