@@ -2,7 +2,7 @@
 
 
 
-### Crackme 1 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/seveb/crackme05/download/crackme05.tar.gz)):
+## Crackme 1 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/seveb/crackme05/download/crackme05.tar.gz)):
 
 To solve this crackme I had to create a keygen that creates a usable username and serial number, which is reliant on the username.
 
@@ -36,7 +36,7 @@ print(username)
 print(serial)
 ~~~
 
-### Crackme 2 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/adamziaja/crackme1/download/crackme1.tar.gz)):
+## Crackme 2 Solution ([link/to/download/location](https://crackmes.dreamhosters.com/users/adamziaja/crackme1/download/crackme1.tar.gz)):
 
 To solve this crackme I had to create a keygen that produces a serial number that gets past the crackme.
 My solution is:
@@ -87,7 +87,7 @@ print(serial)
     which is only possible when all three indexs are 45 which is '-'
 8. To test my rules I tried the serial `0yY0-B00A-A00B-0jY0`, and everything came up cherry.
 
-### Crackme 5 Solution ([link/to/download/location](http://crackmes.cf/users/seveb/crackme04/download/crackme04.tar.gz)):
+## Crackme 5 Solution ([link/to/download/location](http://crackmes.cf/users/seveb/crackme04/download/crackme04.tar.gz)):
 
 To solve this crackme I had to create a keygen that produces a serial number that gets past the crackme.
 My solution is:
