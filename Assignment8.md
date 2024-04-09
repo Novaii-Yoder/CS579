@@ -10,7 +10,7 @@ After sifting through the RegShot I came across these changes that seem to be af
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/8ab7c017-4f3a-414d-8333-d7e8bb4b878b)
 It also seems that it is specifically changing the rules for a file called `windows.exe` and looking for more changes related to this file we find:
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/61000c67-183a-4504-a0c4-bd197a3516b7)
-A prefetch file is a file windows creates on the first time you run a program to try and speed up future startups. This seems like an indicator that NjRAT created and ran these files because there was no other programs other than RegShot, and FakeNet running at the time. We can see this suspicious `windows.exe` file and a `NJQ8.exe' file which is created by NjRAT:
+A prefetch file is a file windows creates on the first time you run a program to try and speed up future startups. This seems like an indicator that NjRAT created and ran these files because there was no other programs other than RegShot, and FakeNet running at the time. We can see this suspicious `windows.exe` file and a `NJQ8.exe` file which is created by NjRAT:
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/85502917-6cec-4e25-8583-5290cefd2e03)
 We can see the malware creating a file in the `mui cache` which is the multilingual user inferface cache, but I have a feeling thats not why NjRAT is using it.
 
