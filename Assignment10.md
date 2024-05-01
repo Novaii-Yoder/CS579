@@ -18,10 +18,12 @@ In the image above you can see that I have already input the shellcode and crash
 
 To calculate the offset we just take the two stack address we found and subtract them from eachother. This will give us the number we need to add to the leaked address everytime we run the code and put into the return address. 
 In this case we take:
+~~~
     0x7ffe2c82e8e0
 -   0x7ffe2c82e870
 --------------------
     0x000000000070 => 112
+~~~
 So now we can but everything together and have the program leak addresses at runtime, and create the return address with the offset, then combine the the shellcode, a buffer of whatever, then finally the return address to the shellcode. Then we can run the program again and it will allow us to use the terminal.
 
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/77026007-490a-4063-a853-4191e27e16fc)
