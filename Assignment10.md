@@ -10,7 +10,7 @@ So now we know we can input our shellcode into the input and overwrite return ad
 
 ![The leaked pointers](https://github.com/Novaii-Yoder/CS579/assets/52936757/ccd3ec2b-297b-4e14-b145-0efc31d86d1c)
 
-Now that we've leaked pointers we just have to determine which one to use and create an offset. Because of randomize stack locations we cant hardcode a return address to our shellcode, because everytime the program runs it would be different. So we have to to find the offset from one of the leaked pointers. I did this by using the corefiles that the cpu dumps when it crashes, so all I had to do was crash the program, which we already discovered how to do. After crashing the program I used the core file and pwntools to open it and view pointers and the stack. I used the stackpointer at the time of the crash and printed the stack around that pointer to get a glimpse of the stack.
+Now that we've leaked pointers we just have to determine which one to use and create an offset. Because of address space layout randomization (ASLR) we cant hardcode a return address to our shellcode, because everytime the program runs it would be different. So we have to to find the offset from one of the leaked pointers. I did this by using the corefiles that the cpu dumps when it crashes, so all I had to do was crash the program, which we already discovered how to do. After crashing the program I used the core file and pwntools to open it and view pointers and the stack. I used the stackpointer at the time of the crash and printed the stack around that pointer to get a glimpse of the stack.
 
 ![The printed stack](https://github.com/Novaii-Yoder/CS579/assets/52936757/875c6722-d68b-4812-9bb3-02e2baad3312)
 
