@@ -24,7 +24,7 @@ In this case we take:
 --------------------
     0x000000000070 => 112
 ~~~
-So now we can but everything together and have the program leak addresses at runtime, and create the return address with the offset, then combine the the shellcode, a buffer of whatever, then finally the return address to the shellcode. Then we can run the program again and it will allow us to use the terminal.
+So now we can put everything together and have the program leak addresses at runtime, and create the return address with the offset, then combine the the shellcode, a buffer of whatever, then finally the return address to the shellcode. Then we can run the program again and it will allow us to use the terminal.
 
 ![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/77026007-490a-4063-a853-4191e27e16fc)
 
