@@ -4,15 +4,15 @@ The goal of this assignment was to learn about control flow integrity and how to
 ## Process
 The first thing we had to do was determine what we could do to the program to break it. To do this I started off by just trying to over flow the buffers for input. There was 2 locations I was able to overflow and cause a segmentation fault, the name and the credit card input for the progam.
 
-![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/3cd84b7c-498e-4497-8a8d-ffdba1d527b9)
+![Example of buffer overflow crash](https://github.com/Novaii-Yoder/CS579/assets/52936757/3cd84b7c-498e-4497-8a8d-ffdba1d527b9)
 
 So now we know we can input our shellcode into the input and overwrite return addresses to call the shellcode, but the hard part now is finding where to overwrite the return address and what address to overwrite it with. The way I did this was by getting the program to leak an address to the stack, this way I could find an offset and use that to get the code to run. This can be done in the pizza program by feeding it a string of `%p` because of the way the program was written. The pizza program uses something like sprintf(), or printf() in the code which allows us to use format specifiers in our string input. This is really bad practice because when you pass too many specifiers and not enough input you get undefined behavior which opens your program to attacks. Because of our format specifiers '%p' we can print what ever is on that stack as pointers to the screen, so we just print a few until we see a pointer that leads to the stack. We can determine which pointers are to the stack using some common sense principals, we know that the stack grows downward and that the start of the stack is normally the max number for the virtual address space, so we know we are looking for the largest valued pointers, which happens to be the `0x7ffe2c82e8e0` value.
 
-![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/0dffaf51-392c-42f9-896f-64b95773e856)
+![The leaked pointers](https://github.com/Novaii-Yoder/CS579/assets/52936757/ccd3ec2b-297b-4e14-b145-0efc31d86d1c)
 
 Now that we've leaked pointers we just have to determine which one to use and create an offset. Because of randomize stack locations we cant hardcode a return address to our shellcode, because everytime the program runs it would be different. So we have to to find the offset from one of the leaked pointers. I did this by using the corefiles that the cpu dumps when it crashes, so all I had to do was crash the program, which we already discovered how to do. After crashing the program I used the core file and pwntools to open it and view pointers and the stack. I used the stackpointer at the time of the crash and printed the stack around that pointer to get a glimpse of the stack.
 
-![image](https://github.com/Novaii-Yoder/CS579/assets/52936757/ecbb3f33-2826-412b-a9cd-4b9c20f4746e)
+![The printed stack](https://github.com/Novaii-Yoder/CS579/assets/52936757/875c6722-d68b-4812-9bb3-02e2baad3312)
 
 In the image above you can see that I have already input the shellcode and crashed the program by following it with a bunch of A's. Using this glimpse into the stack we can determine 2 things: First, that the position of the stackpointer at the time of the crash is return address we want to replace. Second, we know where the adress of the shellcode is, so now we can calculate the offset.
 
